@@ -1,10 +1,4 @@
 
-
-
-
-
-
-
 function unprocEntity(resource) {
     return {
         type: "unprocessableEntity",
