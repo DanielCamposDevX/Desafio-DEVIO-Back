@@ -7,11 +7,18 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Categories {
+  id   Int    @id @unique @default(autoincrement())
+  name String
+  Food Food[]
+}
+
 model Food {
   id          Int         @id @unique @default(autoincrement())
   name        String
   picture     String
-  type        String
+  categorieId Int
+  categories  Categories  @relation(fields: [categorieId], references: [id])
   price       Int
   description String
   OrderItem   OrderItem[]
