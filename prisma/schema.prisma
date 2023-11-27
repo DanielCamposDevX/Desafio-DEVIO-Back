@@ -20,39 +20,40 @@ model Categories {
 }
 
 model Food {
-  id          Int         @id @unique @default(autoincrement())
+  id          Int    @id @unique @default(autoincrement())
   name        String
   picture     String
   categorieId Int
-  categories  Categories  @relation(fields: [categorieId], references: [id])
   price       Int
   description String
-  OrderItem   OrderItem[]
+
+  categories Categories  @relation(fields: [categorieId], references: [id])
+  OrderItem  OrderItem[]
 }
 
 model Orders {
-  id          Int         @id @unique @default(autoincrement())
-  status      String      @default("Requested")
-  observation String      @default("-")
+  id          Int      @id @unique @default(autoincrement())
+  status      String   @default("Requested")
+  observation String   @default("-")
   total       Int?
-  createdAt   DateTime    @default(now())
+  createdAt   DateTime @default(now())
   userId      Int
-  
-  user        user        @relation(fields: [userId], references: [id])
-    orderItems  OrderItem[]
+
+  user       user        @relation(fields: [userId], references: [id])
+  orderItems OrderItem[]
 }
 
 model Extras {
   id          Int           @id @unique @default(autoincrement())
   price       Int
   description String
+  name        String
   ExtraOrders ExtraOrders[]
 }
 
 model OrderItem {
   id          Int           @id @unique @default(autoincrement())
   food        Food          @relation(fields: [foodId], references: [id])
-  extras      String
   quantity    Int
   orderId     Int
   order       Orders        @relation(fields: [orderId], references: [id])
