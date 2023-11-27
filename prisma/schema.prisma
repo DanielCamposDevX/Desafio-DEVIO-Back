@@ -46,4 +46,5 @@ model OrderItem {
   orderId  Int
   order    Orders @relation(fields: [orderId], references: [id])
   foodId   Int
+  total    Int
 }
