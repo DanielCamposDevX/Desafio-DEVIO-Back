@@ -13,4 +13,12 @@ function unprocEntity(resource) {
 }
 
 
-export const error = { unprocEntity };
+function notFound(resource) {
+    return {
+        type: "notFound",
+        message: `${resource ? resource : "ERROR 409"}`
+    }
+}
+
+
+export const error = { unprocEntity, notFound };
