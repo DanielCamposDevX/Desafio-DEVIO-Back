@@ -36,16 +36,15 @@ model Extras {
   id          Int         @id @unique @default(autoincrement())
   price       Int
   description String
-  OrderItem   OrderItem[]
+  orderItems  OrderItem[] @relation("OrderItemExtras")
 }
 
 model OrderItem {
-  id       Int     @id @unique @default(autoincrement())
-  food     Food    @relation(fields: [foodId], references: [id])
-  extra    Extras? @relation(fields: [extraId], references: [id])
+  id       Int      @id @unique @default(autoincrement())
+  food     Food     @relation(fields: [foodId], references: [id])
+  extras   Extras[] @relation("OrderItemExtras")
   quantity Int
   orderId  Int
-  order    Orders  @relation(fields: [orderId], references: [id])
+  order    Orders   @relation(fields: [orderId], references: [id])
   foodId   Int
-  extraId  Int?
 }
