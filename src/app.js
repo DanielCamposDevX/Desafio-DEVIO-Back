@@ -8,7 +8,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 app.use(indexRouter);
-app.use(errorHandler)
+app.use(errorHandler);
 
 
 export default app

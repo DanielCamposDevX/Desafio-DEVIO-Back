@@ -1,4 +1,5 @@
 import { Router } from "express";
+import foodRouter from "./food.routes.js";
 
 
 
@@ -6,6 +7,8 @@ import { Router } from "express";
 
 const indexRouter = Router();
 
+indexRouter
+    .use(foodRouter)
 
 
 
