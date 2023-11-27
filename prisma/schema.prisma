@@ -7,6 +7,12 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model user {
+  id     Int      @id @unique @default(autoincrement())
+  name   String
+  Orders Orders[]
+}
+
 model Categories {
   id   Int    @id @unique @default(autoincrement())
   name String
@@ -26,25 +32,39 @@ model Food {
 
 model Orders {
   id          Int         @id @unique @default(autoincrement())
-  status      String
-  observation String
-  total       Int
-  orderItems  OrderItem[]
+  status      String      @default("Requested")
+  observation String      @default("-")
+  total       Int?
+  createdAt   DateTime    @default(now())
+  userId      Int
+  
+  user        user        @relation(fields: [userId], references: [id])
+    orderItems  OrderItem[]
 }
 
 model Extras {
-  id          Int    @id @unique @default(autoincrement())
+  id          Int           @id @unique @default(autoincrement())
   price       Int
   description String
+  ExtraOrders ExtraOrders[]
 }
 
 model OrderItem {
-  id       Int    @id @unique @default(autoincrement())
-  food     Food   @relation(fields: [foodId], references: [id])
-  extras   String
-  quantity Int
-  orderId  Int
-  order    Orders @relation(fields: [orderId], references: [id])
-  foodId   Int
-  total    Int
+  id          Int           @id @unique @default(autoincrement())
+  food        Food          @relation(fields: [foodId], references: [id])
+  extras      String
+  quantity    Int
+  orderId     Int
+  order       Orders        @relation(fields: [orderId], references: [id])
+  foodId      Int
+  ExtraOrders ExtraOrders[]
+}
+
+model ExtraOrders {
+  id          Int @id @unique @default(autoincrement())
+  orderItemId Int
+  extrasId    Int
+
+  order  OrderItem @relation(fields: [orderItemId], references: [id])
+  extras Extras    @relation(fields: [extrasId], references: [id])
 }
