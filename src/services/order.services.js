@@ -18,7 +18,7 @@ async function createOrder(orderDetails) {
         total += food.price * item.quantity;
 
         const extras = await orderRepositories.findExtraById(item.extras);
-        if (!extras) { throw error.notFound("Algum produto pedido não existe mais!"); }
+        if (extras.length < item.extras.length) { throw error.notFound("Algum produto pedido não existe mais!"); }
         for (const extra of extras) {
             total += extra.price;
         }
