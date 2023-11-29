@@ -17,7 +17,7 @@ async function getAllOrders(req, res) {
 
 async function deleteOrder(req, res) {
     const { orderId } = req.params;
-    await orderServices.deleteOrder(orderId);
+    await orderServices.deleteOrder(Number(orderId));
     return res.sendStatus(httpStatus.OK);
 }
 

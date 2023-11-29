@@ -37,12 +37,20 @@ async function getOrders() {
 
 
 async function deleteOrder(id) {
+    if(isNaN(id)){
+        throw error.badRequest("O Id do pedido deve ser um número");
+    }
+
     const order = await orderRepositories.findOrderById(id);
+
     if (!order) {
-        throw error.notFound("Pedido não encontrado!")
-    };
+        throw error.notFound("Pedido não encontrado!");
+    }
+
     await orderRepositories.deleteOrderById(id);
+
 }
+
 
 
 

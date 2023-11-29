@@ -2,7 +2,7 @@
 function unprocEntity(resource) {
     return {
         type: "unprocessableEntity",
-        message: `${resource ? resource : "ERROR 409"}`
+        message: `${resource ? resource : "ERROR 422"}`
     }
 }
 
@@ -10,9 +10,16 @@ function unprocEntity(resource) {
 function notFound(resource) {
     return {
         type: "notFound",
-        message: `${resource ? resource : "ERROR 409"}`
+        message: `${resource ? resource : "ERROR 404"}`
+    }
+}
+
+function badRequest(resource) {
+    return {
+        type: "badRequest",
+        message: `${resource ? resource : "ERROR 400"}`
     }
 }
 
 
-export const error = { unprocEntity, notFound };
+export const error = { unprocEntity, notFound, badRequest };
