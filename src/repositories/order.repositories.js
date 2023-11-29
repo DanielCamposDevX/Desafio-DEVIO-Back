@@ -37,6 +37,12 @@ async function createOrder(userId, observation, total, orderItems) {
 
 
 
+async function findUserById(id) {
+    return await db.user.findUnique({
+        where: { id }
+    });
+}
+
 
 
 
@@ -47,8 +53,26 @@ async function findExtraById(extraIds) {
 }
 
 
-async function getAllOrders(){
-    return await db.orders.findMany({})
+async function getAllOrders() {
+    return await db.orders.findMany({
+        include: {
+            user: true,
+            orderItems: {
+                include: {
+                    food: {
+                        include: {
+                            categories: true,
+                        },
+                    },
+                    ExtraOrders: {
+                        include: {
+                            extras: true,
+                        },
+                    },
+                },
+            },
+        },
+    })
 }
 
 
@@ -59,7 +83,7 @@ async function findOrderById(id) {
 }
 
 
-async function deleteOrderById(id){
+async function deleteOrderById(id) {
     const orderItems = await db.orderItem.findMany({
         where: { orderId: id },
         select: { id: true },
@@ -88,4 +112,4 @@ async function deleteOrderById(id){
 
 
 
-export const orderRepositories = { createOrder, findExtraById, getAllOrders, findOrderById, deleteOrderById }
+export const orderRepositories = { createOrder, findExtraById, getAllOrders, findOrderById, deleteOrderById, findUserById }

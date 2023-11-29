@@ -5,6 +5,10 @@ import { orderRepositories } from "../repositories/order.repositories.js"
 
 async function createOrder(orderDetails) {
 
+    const user = await orderRepositories.findUserById(orderDetails.userId);
+    if(!user){
+        throw error.badRequest("Usuário não foi encontrado!");
+    }
 
     let total = 0;
 
