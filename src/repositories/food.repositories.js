@@ -8,6 +8,11 @@ async function getAllFoods() {
     return await db.food.findMany({})
 }
 
+async function findFoodById(id) {
+    return await db.food.findUnique({
+        where: { id },
+    });
+}
 
 
 
@@ -19,4 +24,4 @@ async function getAllFoods() {
 
 
 
-export const foodRepositories = { getAllFoods }
+export const foodRepositories = { getAllFoods, findFoodById }

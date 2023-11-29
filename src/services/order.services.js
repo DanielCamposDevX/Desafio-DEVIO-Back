@@ -1,4 +1,5 @@
 import { error } from "../errors/error.js"
+import { foodRepositories } from "../repositories/food.repositories.js";
 import { orderRepositories } from "../repositories/order.repositories.js"
 
 
@@ -8,7 +9,7 @@ async function createOrder(orderDetails) {
     let total = 0;
 
     for (const item of orderDetails.items) {
-        const food = await orderRepositories.findFoodById(item.foodId);
+        const food = await foodRepositories.findFoodById(item.foodId);
         if (!food) { throw error.notFound("Algum produto pedido não existe mais!"); }
         total += food.price * item.quantity;
 
@@ -29,9 +30,18 @@ async function createOrder(orderDetails) {
     return order;
 }
 
-async function getOrders(){
+async function getOrders() {
     const orders = await orderRepositories.getAllOrders()
     return orders;
+}
+
+
+async function deleteOrder(id) {
+    const order = await orderRepositories.findOrderById(id);
+    if (!order) {
+        throw error.notFound("Pedido não encontrado!")
+    };
+    await orderRepositories.deleteOrderById(id);
 }
 
 
@@ -39,5 +49,4 @@ async function getOrders(){
 
 
 
-
-export const orderServices = { createOrder, getOrders }
+export const orderServices = { createOrder, getOrders, deleteOrder }

@@ -15,6 +15,11 @@ async function getAllOrders(req, res) {
     return res.status(200).send(orders);
 }
 
+async function deleteOrder(req, res) {
+    const { orderId } = req.params;
+    await orderServices.deleteOrder(orderId);
+    return res.sendStatus(200);
+}
 
 
 
@@ -24,4 +29,5 @@ async function getAllOrders(req, res) {
 
 
 
-export const orderControllers = { createOrder, getAllOrders }
+
+export const orderControllers = { createOrder, getAllOrders, deleteOrder }

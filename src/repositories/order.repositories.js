@@ -37,11 +37,6 @@ async function createOrder(userId, observation, total, orderItems) {
 
 
 
-async function findFoodById(id) {
-    return await db.food.findUnique({
-        where: { id },
-    });
-}
 
 
 
@@ -57,6 +52,21 @@ async function getAllOrders(){
 }
 
 
+async function findOrderById(id) {
+    return await db.orders.findUnique({
+        where: { id },
+    });
+}
 
 
-export const orderRepositories = { createOrder, findFoodById, findExtraById, getAllOrders }
+async function deleteOrderById(id){
+    await db.orders.delete({
+        where:{
+            id
+        }
+    })
+}
+
+
+
+export const orderRepositories = { createOrder, findExtraById, getAllOrders, findOrderById, deleteOrderById }
