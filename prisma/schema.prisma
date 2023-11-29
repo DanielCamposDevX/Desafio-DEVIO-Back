@@ -14,14 +14,16 @@ model user {
 }
 
 model Categories {
-  id   Int    @id @unique @default(autoincrement())
-  name String
-  Food Food[]
+  id    Int    @id @unique @default(autoincrement())
+  name  String
+  image String
+  Food  Food[]
 }
 
 model Food {
   id          Int    @id @unique @default(autoincrement())
   name        String
+  subtitle    String
   picture     String
   categorieId Int
   price       Int
@@ -45,6 +47,7 @@ model Orders {
 
 model Extras {
   id          Int           @id @unique @default(autoincrement())
+  image       String
   price       Int
   description String
   name        String
