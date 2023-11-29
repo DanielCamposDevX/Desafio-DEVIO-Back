@@ -52,6 +52,11 @@ async function findExtraById(extraIds) {
 }
 
 
+async function getAllOrders(){
+    return await db.orders.findMany({})
+}
 
 
-export const orderRepositories = { createOrder, findFoodById, findExtraById }
+
+
+export const orderRepositories = { createOrder, findFoodById, findExtraById, getAllOrders }

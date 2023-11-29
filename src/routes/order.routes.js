@@ -9,6 +9,7 @@ const orderRoutes = Router();
 
 
 orderRoutes
+    .get("/orders",orderControllers.getAllOrders)
     .post("/orders",validateSchema(orderSchema),orderControllers.createOrder);
 
 

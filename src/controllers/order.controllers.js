@@ -7,7 +7,12 @@ import { orderServices } from "../services/order.services.js";
 async function createOrder(req, res) {
     const orders = req.body;
     const created = await orderServices.createOrder(orders);
-    res.status(201).send(created);
+    return res.status(201).send(created);
+}
+
+async function getAllOrders(req, res) {
+    const orders = await orderServices.getOrders();
+    return res.status(200).send(orders);
 }
 
 
@@ -19,4 +24,4 @@ async function createOrder(req, res) {
 
 
 
-export const orderControllers = { createOrder }
+export const orderControllers = { createOrder, getAllOrders }

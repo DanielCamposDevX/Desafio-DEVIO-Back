@@ -1,9 +1,6 @@
 import { error } from "../errors/error.js"
 import { orderRepositories } from "../repositories/order.repositories.js"
 
-export async function calculateTotal(items) {
-
-}
 
 async function createOrder(orderDetails) {
 
@@ -32,6 +29,10 @@ async function createOrder(orderDetails) {
     return order;
 }
 
+async function getOrders(){
+    const orders = await orderRepositories.getAllOrders()
+    return orders;
+}
 
 
 
@@ -39,5 +40,4 @@ async function createOrder(orderDetails) {
 
 
 
-
-export const orderServices = { createOrder }
+export const orderServices = { createOrder, getOrders }
