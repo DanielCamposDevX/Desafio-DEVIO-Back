@@ -60,11 +60,30 @@ async function findOrderById(id) {
 
 
 async function deleteOrderById(id){
+    const orderItems = await db.orderItem.findMany({
+        where: { orderId: id },
+        select: { id: true },
+    });
+
+    const orderItemIds = orderItems.map((item) => item.id);
+
+    await db.extraOrders.deleteMany({
+        where: {
+            orderItemId: { in: orderItemIds },
+        },
+    });
+
+    await db.orderItem.deleteMany({
+        where: {
+            id: { in: orderItemIds },
+        },
+    });
+
     await db.orders.delete({
-        where:{
-            id
-        }
-    })
+        where: {
+            id,
+        },
+    });
 }
 
 
