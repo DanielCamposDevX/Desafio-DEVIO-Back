@@ -1,7 +1,7 @@
 import { faker } from "@faker-js/faker";
-import { db } from "../helpers";
-import { createFood } from "./food.factories";
-import { createExtra } from "./extra.factories";
+import { db } from "../helpers.js";
+import { createFood } from "./food.factories.js";
+import { createExtra } from "./extra.factories.js";
 
 
 export async function createUser() {
