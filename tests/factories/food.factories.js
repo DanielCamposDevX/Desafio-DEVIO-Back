@@ -1,15 +1,8 @@
 import { faker } from "@faker-js/faker";
 import { db } from "../helpers.js";
+import { createCategory } from "./category.factory.js";
 
 
-export async function createCategory(){
-    return await db.categories.create({
-        data:{
-            image: faker.image.url(),
-            name: faker.word.adjective()
-        }
-    })
-}
 
 
 
