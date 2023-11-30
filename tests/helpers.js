@@ -14,6 +14,5 @@ export async function CleanDB(){
     await db.extras.deleteMany({});
     await db.food.deleteMany({});
     await db.categories.deleteMany({});
-    await db.user.deleteMany({});
     await db.$disconnect()
 }

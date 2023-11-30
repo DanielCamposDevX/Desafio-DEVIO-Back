@@ -1,7 +1,6 @@
 import Joi from "joi";
 
 export const orderSchema = Joi.object({
-    userId: Joi.number().required(),
     items: Joi.array().items(
         Joi.object({
             extras: Joi.array().items(Joi.number()).required(),
@@ -11,3 +10,9 @@ export const orderSchema = Joi.object({
         })
     ).required(),
 });
+
+
+export const orderUpdateSchema = Joi.object({
+    name: Joi.string(),
+    status: Joi.string().required()
+})

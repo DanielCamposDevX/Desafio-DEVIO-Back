@@ -10,6 +10,13 @@ async function createOrder(req, res) {
     return res.status(httpStatus.CREATED).send(created);
 }
 
+async function updateOrder(req, res) {
+    const { orderId } = req.params;
+    const order = req.body;
+    await orderServices.updateOrder(Number(orderId),order);
+    return res.sendStatus(httpStatus.OK);
+}
+
 async function getAllOrders(req, res) {
     const orders = await orderServices.getOrders();
     return res.status(httpStatus.OK).send(orders);
@@ -30,4 +37,4 @@ async function deleteOrder(req, res) {
 
 
 
-export const orderControllers = { createOrder, getAllOrders, deleteOrder }
+export const orderControllers = { createOrder, getAllOrders, deleteOrder, updateOrder }

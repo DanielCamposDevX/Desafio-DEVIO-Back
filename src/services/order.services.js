@@ -4,12 +4,6 @@ import { orderRepositories } from "../repositories/order.repositories.js"
 
 
 async function createOrder(orderDetails) {
-
-    const user = await orderRepositories.findUserById(orderDetails.userId);
-    if(!user){
-        throw error.badRequest("Usuário não foi encontrado!");
-    }
-
     let total = 0;
 
     for (const item of orderDetails.items) {
@@ -25,8 +19,6 @@ async function createOrder(orderDetails) {
     }
 
     const order = await orderRepositories.createOrder(
-        orderDetails.userId,
-        orderDetails.observation,
         total,
         orderDetails.items
     );
@@ -37,6 +29,20 @@ async function createOrder(orderDetails) {
 async function getOrders() {
     const orders = await orderRepositories.getAllOrders()
     return orders;
+}
+
+async function updateOrder(id,newData) {
+    if(isNaN(id)){
+        throw error.badRequest("O Id do pedido deve ser um número");
+    }
+
+    const order = await orderRepositories.findOrderById(id);
+
+    if (!order) {
+        throw error.notFound("Pedido não encontrado!");
+    }
+
+    await orderRepositories.updateOrder(id,newData);
 }
 
 
@@ -61,4 +67,4 @@ async function deleteOrder(id) {
 
 
 
-export const orderServices = { createOrder, getOrders, deleteOrder }
+export const orderServices = { createOrder, getOrders, deleteOrder, updateOrder }

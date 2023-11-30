@@ -2,10 +2,9 @@ import db from "../config/prisma.js"
 
 
 
-async function createOrder(userId, observation, total, orderItems) {
+async function createOrder(total, orderItems) {
     return await db.orders.create({
         data: {
-            userId: userId,
             total: total,
             orderItems: {
                 create: orderItems.map((item) => ({
@@ -37,11 +36,6 @@ async function createOrder(userId, observation, total, orderItems) {
 
 
 
-async function findUserById(id) {
-    return await db.user.findUnique({
-        where: { id }
-    });
-}
 
 
 
@@ -56,7 +50,6 @@ async function findExtraById(extraIds) {
 async function getAllOrders() {
     return await db.orders.findMany({
         include: {
-            user: true,
             orderItems: {
                 include: {
                     food: {
@@ -79,6 +72,16 @@ async function getAllOrders() {
 async function findOrderById(id) {
     return await db.orders.findUnique({
         where: { id },
+    });
+}
+
+async function updateOrder(id,order) {
+    return await db.orders.update({
+        where: { id },
+        data:{
+            name: order.name,
+            status: order.status
+        }
     });
 }
 
@@ -112,4 +115,4 @@ async function deleteOrderById(id) {
 
 
 
-export const orderRepositories = { createOrder, findExtraById, getAllOrders, findOrderById, deleteOrderById, findUserById }
+export const orderRepositories = { createOrder, findExtraById, getAllOrders, findOrderById, deleteOrderById, updateOrder }
