@@ -7,7 +7,8 @@
   "scripts": {
     "start": "node src/server.js",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --runInBand",
-    "seed": "node prisma/seed/seed.js"
+    "seed": "node prisma/seed/seed.js",
+    "build": "npx prisma generate && npx prisma migrate deploy"
   },
   "author": "",
   "license": "ISC",
