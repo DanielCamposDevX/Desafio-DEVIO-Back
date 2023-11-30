@@ -36,7 +36,6 @@ model Food {
 model Orders {
   id          Int      @id @unique @default(autoincrement())
   status      String   @default("Requested")
-  observation String   @default("-")
   total       Int?
   createdAt   DateTime @default(now())
   userId      Int
