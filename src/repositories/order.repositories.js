@@ -6,7 +6,6 @@ async function createOrder(userId, observation, total, orderItems) {
     return await db.orders.create({
         data: {
             userId: userId,
-            observation: observation,
             total: total,
             orderItems: {
                 create: orderItems.map((item) => ({
