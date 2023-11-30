@@ -8,6 +8,7 @@ export const orderSchema = Joi.object({
             extras: Joi.array().items(Joi.number()).required(),
             quantity: Joi.number().required(),
             foodId: Joi.number().required(),
+            observation: Joi.string().required()
         })
     ).required(),
 });

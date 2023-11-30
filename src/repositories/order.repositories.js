@@ -12,6 +12,7 @@ async function createOrder(userId, observation, total, orderItems) {
                 create: orderItems.map((item) => ({
                     foodId: item.foodId,
                     quantity: item.quantity,
+                    observation: item.observation,
                     ExtraOrders: {
                         create: item.extras.map(extraId => ({
                             extras: { connect: { id: extraId } }

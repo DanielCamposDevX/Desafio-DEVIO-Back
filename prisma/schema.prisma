@@ -60,6 +60,7 @@ model OrderItem {
   quantity    Int
   orderId     Int
   order       Orders        @relation(fields: [orderId], references: [id])
+  observation String
   foodId      Int
   ExtraOrders ExtraOrders[]
 }
