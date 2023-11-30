@@ -12,18 +12,6 @@ UTILIZE O NODE MAIS RECENTE!!
 3. Utilize o comando "npm run build" para criar e iniciar o banco de dados.
 4. Por fim para iniciar o projeto utilize "npm start"
 
+# ROTAS
+# Documentação completa no arquivo documentation.html
 
-# Rotas
-
-
-GET "/categories" retorna todas as categorias , com o status 200
-
-GET "/extras" retorna todos os adicionais, com o status 200
-
-GET "/foods" retorna todas as comidas , com o status 200
-
-POST "/orders" cria o pedido do cliente retornando 201
-
-DELETE "/orders/:orderId" deleta um pedido caso existente retornando 200
-
-PATCH "/orders/:orderId" atualiza o nome e o status do pedido
