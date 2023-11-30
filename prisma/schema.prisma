@@ -7,12 +7,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model user {
-  id     Int      @id @unique @default(autoincrement())
-  name   String
-  Orders Orders[]
-}
-
 model Categories {
   id    Int    @id @unique @default(autoincrement())
   name  String
@@ -34,13 +28,12 @@ model Food {
 }
 
 model Orders {
-  id          Int      @id @unique @default(autoincrement())
-  status      String   @default("Requested")
-  total       Int?
-  createdAt   DateTime @default(now())
-  userId      Int
+  id        Int      @id @unique @default(autoincrement())
+  status    String   @default("WAITING PAYMENT")
+  total     Int?
+  createdAt DateTime @default(now())
+  name      String?
 
-  user       user        @relation(fields: [userId], references: [id])
   orderItems OrderItem[]
 }
 
